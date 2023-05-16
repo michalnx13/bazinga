@@ -1,4 +1,4 @@
-package com.example.bazinga
+package com.example.bazinga.presentation
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -10,7 +10,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.bazinga.ui.theme.BazingaTheme
+import com.example.bazinga.presentation.ui.theme.BazingaTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

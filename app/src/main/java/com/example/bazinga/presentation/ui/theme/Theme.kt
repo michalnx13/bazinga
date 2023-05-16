@@ -1,4 +1,4 @@
-package com.example.bazinga.ui.theme
+package com.example.bazinga.presentation.ui.theme
 
 import android.app.Activity
 import android.os.Build
