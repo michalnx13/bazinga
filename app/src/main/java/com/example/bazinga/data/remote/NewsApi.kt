@@ -7,8 +7,8 @@ import retrofit2.http.Path
 interface NewsApi {
 
     @GET("/articles/")
-    suspend fun getArticles(): List<NewsDTO>
+    suspend fun getNews(): List<NewsDTO>
 
     @GET("/articles/{id}")
-    suspend fun getArticleDetails(@Path("id") id: Int): NewsDTO
+    suspend fun getNewsDetails(@Path("id") id: Int): NewsDTO
 }
