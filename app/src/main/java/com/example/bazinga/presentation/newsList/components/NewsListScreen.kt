@@ -31,7 +31,7 @@ fun NewsListScreen(
                 NewsListItem(
                     news = news,
                     onItemClickAction = {
-                        navController.navigate(Screen.NewsDetailsScreen.route + "${it.id}")
+                        navController.navigate(Screen.NewsDetailsScreen.route + "/${it.id}")
                     }
                 )
             }
