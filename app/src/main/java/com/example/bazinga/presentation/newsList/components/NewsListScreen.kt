@@ -15,14 +15,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavController
-import com.example.bazinga.presentation.Screen
 import com.example.bazinga.presentation.newsList.NewsListViewModel
 
 @Composable
 fun NewsListScreen(
-    navController: NavController,
-    viewModel: NewsListViewModel = hiltViewModel()
+    viewModel: NewsListViewModel = hiltViewModel(),
+    onItemClickAction: (Int) -> Unit
 ) {
     val state = viewModel.state.value
     Box(modifier = Modifier.fillMaxSize()) {
@@ -31,7 +29,7 @@ fun NewsListScreen(
                 NewsListItem(
                     news = news,
                     onItemClickAction = {
-                        navController.navigate(Screen.NewsDetailsScreen.route + "/${it.id}")
+                        onItemClickAction(news.id)
                     }
                 )
             }
