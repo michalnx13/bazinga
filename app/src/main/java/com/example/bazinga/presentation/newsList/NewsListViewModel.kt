@@ -9,6 +9,7 @@ import com.example.bazinga.domain.useCase.GetNewsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -20,10 +21,12 @@ class NewsListViewModel @Inject constructor(
     val state: State<NewsListState> = _state
 
     init {
-        getNews()
+        viewModelScope.launch {
+            getNews()
+        }
     }
 
-    private fun getNews() {
+    private suspend fun getNews() {
         getNewsUseCase.invoke().onEach { result ->
             when (result) {
                 is Result.Success -> _state.value = NewsListState(news = result.data ?: emptyList())

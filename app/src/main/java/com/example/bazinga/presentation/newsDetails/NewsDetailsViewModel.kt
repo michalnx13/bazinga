@@ -11,6 +11,7 @@ import com.example.bazinga.domain.useCase.GetNewsDetailsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -22,12 +23,14 @@ class NewsDetailsViewModel @Inject constructor(
     val state: State<NewsDetailsState> = _state
 
     init {
-        savedStateHandle.get<Int>(ParamsKeys.NEWS_ID)?.let { newsId ->
-            getNewsDetails(newsId)
+        viewModelScope.launch {
+            savedStateHandle.get<Int>(ParamsKeys.NEWS_ID)?.let { newsId ->
+                getNewsDetails(newsId)
+            }
         }
     }
 
-    private fun getNewsDetails(newsId: Int) {
+    private suspend fun getNewsDetails(newsId: Int) {
         getNewsDetailsUseCase.invoke(newsId).onEach { result ->
             when (result) {
                 is Result.Success -> _state.value = NewsDetailsState(news = result.data)
