@@ -1,9 +1,10 @@
 package com.example.bazinga.domain.repository
 
-import com.example.bazinga.data.remote.dto.NewsDTO
+import com.example.bazinga.domain.model.News
+import com.example.bazinga.domain.model.NewsDetails
 
 interface NewsRepository {
 
-    suspend fun getNews(): List<NewsDTO>
-    suspend fun getNewsDetails(newsId: Int): NewsDTO
+    suspend fun getNews(): List<News>
+    suspend fun getNewsDetails(newsId: Int): NewsDetails
 }

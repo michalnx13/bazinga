@@ -1,7 +1,6 @@
 package com.example.bazinga.domain.useCase
 
 import com.example.bazinga.common.Resource
-import com.example.bazinga.data.remote.dto.toNews
 import com.example.bazinga.domain.model.News
 import com.example.bazinga.domain.repository.NewsRepository
 import kotlinx.coroutines.flow.Flow
@@ -17,9 +16,7 @@ class GetNewsUseCase @Inject constructor(
     operator fun invoke(): Flow<Resource<List<News>>> = flow {
         try {
             emit(Resource.Loading())
-            val newsList = repository.getNews().map { newsDTO ->
-                newsDTO.toNews()
-            }
+            val newsList = repository.getNews()
             emit(Resource.Success(newsList))
         } catch (e: HttpException) {
             emit(Resource.Error(e.localizedMessage))
