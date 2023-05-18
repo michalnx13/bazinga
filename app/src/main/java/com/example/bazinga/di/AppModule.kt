@@ -2,7 +2,9 @@ package com.example.bazinga.di
 
 import com.example.bazinga.common.Endpoints
 import com.example.bazinga.data.remote.NewsApi
+import com.example.bazinga.data.repository.NewsDetailsRepositoryImpl
 import com.example.bazinga.data.repository.NewsRepositoryImpl
+import com.example.bazinga.domain.repository.NewsDetailsRepository
 import com.example.bazinga.domain.repository.NewsRepository
 import dagger.Module
 import dagger.Provides
@@ -31,5 +33,11 @@ object AppModule {
     @Singleton
     fun provideNewsRepository(newsApi: NewsApi): NewsRepository {
         return NewsRepositoryImpl(newsApi)
+    }
+
+    @Provides
+    @Singleton
+    fun provideNewsDetailsRepository(newsAPi: NewsApi): NewsDetailsRepository {
+        return NewsDetailsRepositoryImpl(newsAPi)
     }
 }
