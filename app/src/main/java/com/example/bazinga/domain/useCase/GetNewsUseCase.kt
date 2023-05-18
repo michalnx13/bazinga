@@ -1,6 +1,6 @@
 package com.example.bazinga.domain.useCase
 
-import com.example.bazinga.common.Resource
+import com.example.bazinga.common.Result
 import com.example.bazinga.domain.model.News
 import com.example.bazinga.domain.repository.NewsRepository
 import kotlinx.coroutines.flow.Flow
@@ -13,15 +13,15 @@ class GetNewsUseCase @Inject constructor(
     private val repository: NewsRepository
 ) {
 
-    operator fun invoke(): Flow<Resource<List<News>>> = flow {
+    operator fun invoke(): Flow<Result<List<News>>> = flow {
         try {
-            emit(Resource.Loading())
+            emit(Result.Loading())
             val newsList = repository.getNews()
-            emit(Resource.Success(newsList))
+            emit(Result.Success(newsList))
         } catch (e: HttpException) {
-            emit(Resource.Error(e.localizedMessage))
+            emit(Result.Error(e.localizedMessage))
         } catch (e: IOException) {
-            emit(Resource.Error("Check your internet connection!"))
+            emit(Result.Error("Check your internet connection!"))
         }
     }
 }

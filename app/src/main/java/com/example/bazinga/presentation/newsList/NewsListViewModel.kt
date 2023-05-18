@@ -4,7 +4,7 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.bazinga.common.Resource
+import com.example.bazinga.common.Result
 import com.example.bazinga.domain.useCase.GetNewsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
@@ -26,15 +26,9 @@ class NewsListViewModel @Inject constructor(
     private fun getNews() {
         getNewsUseCase.invoke().onEach { result ->
             when (result) {
-                is Resource.Success -> {
-                    _state.value = NewsListState(news = result.data ?: emptyList())
-                }
-
-                is Resource.Loading -> {
-                    _state.value = NewsListState(isLoading = true)
-                }
-
-                is Resource.Error -> _state.value = NewsListState(error = result.message)
+                is Result.Success -> _state.value = NewsListState(news = result.data ?: emptyList())
+                is Result.Loading -> _state.value = NewsListState(isLoading = true)
+                is Result.Error -> _state.value = NewsListState(error = result.message)
             }
         }.launchIn(viewModelScope)
     }
