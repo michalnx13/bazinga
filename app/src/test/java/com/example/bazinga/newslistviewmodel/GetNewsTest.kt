@@ -14,6 +14,9 @@ import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.test.setMain
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertFalse
+import org.junit.jupiter.api.Assertions.assertNull
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
@@ -33,9 +36,6 @@ class GetNewsTest {
     @BeforeEach
     fun init() {
         useCase = GetNewsUseCase(repository)
-        coEvery { repository.getNews() } returns flow {
-            emit(Result.Success(newsList))
-        }
         Dispatchers.setMain(Dispatchers.Unconfined)
     }
 
@@ -46,8 +46,36 @@ class GetNewsTest {
     }
 
     @Test
-    fun `sets obtained data in state`() = runTest {
+    fun `sets obtained data in state when result is success`() = runTest {
+        coEvery { repository.getNews() } returns flow {
+            emit(Result.Success(newsList))
+        }
         val viewModel = NewsListViewModel(useCase)
         assertEquals(newsList, viewModel.state.value.news)
+        assertFalse(viewModel.state.value.isLoading)
+        assertNull(viewModel.state.value.error)
+    }
+
+    @Test
+    fun `sets obtained data in state when result is loading`() = runTest {
+        coEvery { repository.getNews() } returns flow {
+            emit(Result.Loading())
+        }
+        val viewModel = NewsListViewModel(useCase)
+        assertTrue(viewModel.state.value.news.isEmpty())
+        assertTrue(viewModel.state.value.isLoading)
+        assertNull(viewModel.state.value.error)
+    }
+
+    @Test
+    fun `sets obtained data in state when result is error`() = runTest {
+        val errorMessage = "error"
+        coEvery { repository.getNews() } returns flow {
+            emit(Result.Error(message = errorMessage))
+        }
+        val viewModel = NewsListViewModel(useCase)
+        assertTrue(viewModel.state.value.news.isEmpty())
+        assertFalse(viewModel.state.value.isLoading)
+        assertEquals(errorMessage, viewModel.state.value.error)
     }
 }
