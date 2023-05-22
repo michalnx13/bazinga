@@ -1,5 +1,6 @@
 package com.example.bazinga.data.remote.dto
 
+import com.example.bazinga.common.TextFormatter.formatToLocalDate
 import com.example.bazinga.domain.model.News
 import com.example.bazinga.domain.model.NewsDetails
 
@@ -18,7 +19,7 @@ data class NewsDTO(
 
 fun NewsDTO.toNews() = News(
     id = id,
-    publishedAt = publishedAt,
+    publishedAt = publishedAt.formatToLocalDate(),
     title = title
 )
 
