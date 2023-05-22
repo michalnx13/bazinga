@@ -1,6 +1,6 @@
 package com.example.bazinga.common.textformatter
 
-import com.example.bazinga.common.TextFormatter.formatToLocalDate
+import com.example.bazinga.common.formatToLocalDate
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.DynamicTest
 import org.junit.jupiter.api.TestFactory
