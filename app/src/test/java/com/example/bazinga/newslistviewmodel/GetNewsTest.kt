@@ -46,7 +46,7 @@ class GetNewsTest {
     }
 
     @Test
-    fun `sets obtained data in state when result is success`() = runTest {
+    fun `sets correct in state when result is success`() = runTest {
         coEvery { repository.getNews() } returns flow {
             emit(Result.Success(newsList))
         }
@@ -57,7 +57,7 @@ class GetNewsTest {
     }
 
     @Test
-    fun `sets obtained data in state when result is loading`() = runTest {
+    fun `sets correct state when result is loading`() = runTest {
         coEvery { repository.getNews() } returns flow {
             emit(Result.Loading())
         }
@@ -68,7 +68,7 @@ class GetNewsTest {
     }
 
     @Test
-    fun `sets obtained data in state when result is error`() = runTest {
+    fun `sets correct state when result is error`() = runTest {
         val errorMessage = "error"
         coEvery { repository.getNews() } returns flow {
             emit(Result.Error(message = errorMessage))
