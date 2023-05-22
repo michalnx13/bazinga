@@ -4,6 +4,7 @@ import com.example.bazinga.data.remote.dto.EventDTO
 import com.example.bazinga.data.remote.dto.LaunchDTO
 import com.example.bazinga.data.remote.dto.NewsDTO
 import com.example.bazinga.domain.model.News
+import com.example.bazinga.domain.model.NewsDetails
 
 object MockData {
 
@@ -39,5 +40,29 @@ object MockData {
         id = id,
         publishedAt = publishedAt,
         title = title
+    )
+
+    fun getNewsDetails(
+        events: List<EventDTO> = listOf(EventDTO(id = "1", provider = "provider")),
+        featured: Boolean = false,
+        id: Int,
+        imageUrl: String = "www.img.pl",
+        launches: List<LaunchDTO> = listOf(LaunchDTO(id = "2", provider = "provider 2")),
+        newsSite: String = "https://site.org",
+        publishedAt: String = "1.01.2022",
+        summary: String = "summary",
+        title: String,
+        url: String = "url.com"
+    ) = NewsDetails(
+        events = events,
+        featured = featured,
+        id = id,
+        imageUrl = imageUrl,
+        launches = launches,
+        newsSite = newsSite,
+        publishedAt = publishedAt,
+        summary = summary,
+        title = title,
+        url = url
     )
 }
