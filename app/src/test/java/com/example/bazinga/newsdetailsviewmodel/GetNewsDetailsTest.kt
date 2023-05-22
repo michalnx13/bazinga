@@ -26,7 +26,6 @@ class GetNewsDetailsTest {
     private val newsId = 1
     private val newsTitle = "news title"
     private val news = MockData.getNewsDetails(id = newsId, title = newsTitle)
-    private val mainThreadSurrogate = Dispatchers.Unconfined
 
     @OptIn(ExperimentalCoroutinesApi::class)
     @BeforeEach
@@ -36,7 +35,7 @@ class GetNewsDetailsTest {
             emit(Result.Success(news))
         }
         every { savedStateHandle.get<Int>(any()) } returns newsId
-        Dispatchers.setMain(mainThreadSurrogate)
+        Dispatchers.setMain(Dispatchers.Unconfined)
     }
 
     @OptIn(ExperimentalCoroutinesApi::class)

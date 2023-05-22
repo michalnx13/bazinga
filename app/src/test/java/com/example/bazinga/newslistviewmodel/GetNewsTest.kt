@@ -28,8 +28,6 @@ class GetNewsTest {
         MockData.getNews(id = newsId1, title = newsTitle1),
         MockData.getNews(id = newsId2, title = newsTitle2)
     )
-    private val mainThreadSurrogate = Dispatchers.Unconfined
-
 
     @OptIn(ExperimentalCoroutinesApi::class)
     @BeforeEach
@@ -38,7 +36,7 @@ class GetNewsTest {
         coEvery { repository.getNews() } returns flow {
             emit(Result.Success(newsList))
         }
-        Dispatchers.setMain(mainThreadSurrogate)
+        Dispatchers.setMain(Dispatchers.Unconfined)
     }
 
     @OptIn(ExperimentalCoroutinesApi::class)

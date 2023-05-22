@@ -14,8 +14,11 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.bazinga.R
 
 
 @Composable
@@ -33,30 +36,30 @@ fun NewsDetailsScreen(viewModel: NewsDetailsViewModel = hiltViewModel()) {
                     style = MaterialTheme.typography.labelLarge,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(6.dp)
+                        .padding(dimensionResource(id = R.dimen.text_margin))
                 )
-                Spacer(modifier = Modifier.height(20.dp))
+                Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.large_spacer)))
                 Text(
-                    text = "Data publikacji:",
+                    text = stringResource(R.string.published_at),
                     style = MaterialTheme.typography.labelMedium,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(6.dp)
+                        .padding(dimensionResource(id = R.dimen.text_margin))
                 )
                 Text(
                     text = news.publishedAt,
                     style = MaterialTheme.typography.labelMedium,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(6.dp)
+                        .padding(dimensionResource(id = R.dimen.text_margin))
                 )
-                Divider(modifier = Modifier.padding(12.dp))
+                Divider(modifier = Modifier.padding(dimensionResource(id = R.dimen.medium_divider)))
                 Text(
-                    text = "Treść:",
+                    text = stringResource(id = R.string.summary),
                     style = MaterialTheme.typography.labelMedium,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(6.dp)
+                        .padding(dimensionResource(id = R.dimen.text_margin))
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(
@@ -64,7 +67,7 @@ fun NewsDetailsScreen(viewModel: NewsDetailsViewModel = hiltViewModel()) {
                     style = MaterialTheme.typography.labelMedium,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(6.dp)
+                        .padding(dimensionResource(id = R.dimen.small_divider))
                 )
             }
         }

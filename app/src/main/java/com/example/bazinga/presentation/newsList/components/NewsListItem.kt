@@ -5,14 +5,15 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.dp
+import com.example.bazinga.R
 import com.example.bazinga.domain.model.News
 
 @Composable
@@ -23,21 +24,29 @@ fun NewsListItem(
     Row(
         modifier = Modifier
             .fillMaxWidth()
+            .wrapContentHeight()
             .clickable { onItemClickAction(news) }
-            .padding(12.dp),
+            .padding(dimensionResource(id = R.dimen.text_margin)),
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         Text(
             text = news.title,
             overflow = TextOverflow.Ellipsis,
-            style = MaterialTheme.typography.labelLarge,
-            modifier = Modifier.align(CenterVertically)
+            style = MaterialTheme.typography.bodyMedium,
+            modifier = Modifier
+                .align(CenterVertically)
+                .weight(4f)
+                .padding(dimensionResource(id = R.dimen.text_margin)),
+            maxLines = 1
         )
         Text(
             text = news.publishedAt,
-            style = MaterialTheme.typography.labelMedium,
-            textAlign = TextAlign.End,
-            modifier = Modifier.align(CenterVertically)
+            style = MaterialTheme.typography.bodyMedium,
+            modifier = Modifier
+                .align(CenterVertically)
+                .weight(1f)
+                .padding(dimensionResource(id = R.dimen.text_margin)),
+            maxLines = 1
         )
     }
 }
