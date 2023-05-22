@@ -26,9 +26,9 @@ class NewsDetailsRepositoryImpl @Inject constructor(
             }
             emit(Result.Success(news))
         } catch (e: HttpException) {
-            emit(Result.Error(message = e.localizedMessage))
+            emit(Result.Error(message = "Check your internet connection!"))
         } catch (e: IOException) {
-            emit(Result.Error("Check your internet connection!"))
+            emit(Result.Error(message = "Something went wrong :("))
         }
     }
 }
