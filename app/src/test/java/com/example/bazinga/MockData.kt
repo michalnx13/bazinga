@@ -3,6 +3,7 @@ package com.example.bazinga
 import com.example.bazinga.data.remote.dto.EventDTO
 import com.example.bazinga.data.remote.dto.LaunchDTO
 import com.example.bazinga.data.remote.dto.NewsDTO
+import com.example.bazinga.domain.model.News
 
 object MockData {
 
@@ -28,5 +29,15 @@ object MockData {
         publishedAt = publishedAt,
         summary = summary,
         url = url
+    )
+
+    fun getNews(
+        id: Int,
+        publishedAt: String = "1999",
+        title: String = "title"
+    ) = News(
+        id = id,
+        publishedAt = publishedAt,
+        title = title
     )
 }
