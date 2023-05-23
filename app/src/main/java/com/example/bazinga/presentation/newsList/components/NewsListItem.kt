@@ -11,10 +11,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.style.TextOverflow
 import com.example.bazinga.R
 import com.example.bazinga.domain.model.News
+import com.example.bazinga.presentation.navigation.NavigationTags.NEWS_ITEM_TAG
 
 @Composable
 fun NewsListItem(
@@ -26,7 +28,8 @@ fun NewsListItem(
             .fillMaxWidth()
             .wrapContentHeight()
             .clickable { onItemClickAction(news) }
-            .padding(dimensionResource(id = R.dimen.text_margin)),
+            .padding(dimensionResource(id = R.dimen.text_margin))
+            .testTag(NEWS_ITEM_TAG),
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         Text(

@@ -13,18 +13,27 @@ import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.testTagsAsResourceId
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.bazinga.R
+import com.example.bazinga.presentation.navigation.NavigationTags.DETAILS_SCREEN_TAG
 
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun NewsDetailsScreen(viewModel: NewsDetailsViewModel = hiltViewModel()) {
     val state = viewModel.state.value
-    Box(modifier = Modifier.fillMaxSize()) {
+    Box(modifier = Modifier
+        .fillMaxSize()
+        .semantics { testTagsAsResourceId = true }
+        .testTag(DETAILS_SCREEN_TAG)) {
         state.news?.let { news ->
             Column(
                 modifier = Modifier

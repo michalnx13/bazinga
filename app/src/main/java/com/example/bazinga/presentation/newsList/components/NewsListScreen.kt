@@ -15,22 +15,32 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.testTagsAsResourceId
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.bazinga.R
+import com.example.bazinga.presentation.navigation.NavigationTags.START_SCREEN_TAG
 import com.example.bazinga.presentation.newsList.NewsListViewModel
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun NewsListScreen(
     viewModel: NewsListViewModel = hiltViewModel(),
     onItemClickAction: (Int) -> Unit
 ) {
     val state = viewModel.state.value
-    Box(modifier = Modifier.fillMaxSize()) {
+    Box(modifier = Modifier
+        .fillMaxSize()
+        .semantics { testTagsAsResourceId = true }
+        .testTag(START_SCREEN_TAG)
+    ) {
         Column {
             Text(
                 text = stringResource(id = R.string.news_list),

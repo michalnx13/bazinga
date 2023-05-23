@@ -1,4 +1,4 @@
-package com.example.bazinga.common
+package com.example.bazinga.presentation.navigation
 
 object Screens {
     const val NEWS_LIST_SCREEN = "news_list_screen"
